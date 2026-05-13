@@ -1,0 +1,498 @@
+/* global React */
+const { useState, useEffect } = React;
+
+function SunsetHack() {
+  const [submitted, setSubmitted] = useState(false);
+  const [openFAQ, setOpenFAQ] = useState(0);
+
+  return (
+    <div style={sunsetStyles.root} dir="ltr">
+      {/* Decorative blobs */}
+      <div style={{...sunsetStyles.blob, top: -150, left: -100, background: '#FF6B9D'}} />
+      <div style={{...sunsetStyles.blob, top: 200, right: -180, background: '#FFB347', width: 500, height: 500}} />
+      <div style={{...sunsetStyles.blob, bottom: 100, left: -200, background: '#A855F7', width: 450, height: 450}} />
+
+      {/* NAV */}
+      <header style={sunsetStyles.nav}>
+        <div style={sunsetStyles.navInner}>
+          <div style={sunsetStyles.logo}>
+            <div style={sunsetStyles.logoMark}>ע</div>
+            <span>Hebrew<em style={{color: '#FF6B9D', fontStyle: 'normal'}}>Hack</em></span>
+          </div>
+          <nav style={sunsetStyles.navLinks}>
+            <a href="#why" style={sunsetStyles.navLink}>Why us</a>
+            <a href="#compare" style={sunsetStyles.navLink}>Compare</a>
+            <a href="#testimonials" style={sunsetStyles.navLink}>Reviews</a>
+            <a href="#faq" style={sunsetStyles.navLink}>FAQ</a>
+          </nav>
+          <a href="#signup" style={sunsetStyles.navCta}>Free trial →</a>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section style={sunsetStyles.hero}>
+        <div style={sunsetStyles.heroInner}>
+          <div>
+            <div style={sunsetStyles.scribble}>shalom, friends 👋</div>
+            <h1 style={sunsetStyles.h1}>
+              Speak Hebrew<br/>
+              <span style={sunsetStyles.h1Accent}>like an Israeli.</span>
+            </h1>
+            <p style={sunsetStyles.lead}>
+              Live Zoom lessons with two Israeli teachers. No textbook torture, no shame —
+              just real conversations from day one.
+            </p>
+            <div style={sunsetStyles.heroCta}>
+              <a href="#signup" style={sunsetStyles.btnPrimary}>📚 Start free trial</a>
+              <div style={sunsetStyles.trust}>
+                <span style={sunsetStyles.stars}>★★★★★</span>
+                <span><b>4.9</b> from 200+ students</span>
+              </div>
+            </div>
+            <div style={sunsetStyles.statRow}>
+              <div><strong>200+</strong><br/><span>students worldwide</span></div>
+              <div style={sunsetStyles.sep} />
+              <div><strong>30+</strong><br/><span>countries</span></div>
+              <div style={sunsetStyles.sep} />
+              <div><strong>2</strong><br/><span>native teachers</span></div>
+            </div>
+          </div>
+
+          <div style={sunsetStyles.heroVisual}>
+            <div style={sunsetStyles.sticker}>
+              <em style={{display:'block', fontSize:32, fontStyle:'normal'}}>1st lesson</em>
+              <span>FREE!</span>
+            </div>
+            <div style={sunsetStyles.lessonCard}>
+              <div style={sunsetStyles.lessonHead}>
+                <div style={sunsetStyles.greenDot}/>
+                <span>TODAY · daily phrases</span>
+              </div>
+              {[
+                {heb:'מה נשמע?', tr:'ma nishma?', en:"What's up?"},
+                {heb:'סבבה לגמרי', tr:'sababa legamrey', en:'Totally cool'},
+                {heb:'יאללה ביי', tr:'yalla bye', en:'See ya!'},
+                {heb:'חבל על הזמן', tr:"ḥaval al ha'zman", en:'Amazing!'},
+              ].map((r,i)=>(
+                <div key={i} style={sunsetStyles.lessonRow}>
+                  <div>
+                    <div style={sunsetStyles.heb}>{r.heb}</div>
+                    <div style={sunsetStyles.translit}>{r.tr}</div>
+                  </div>
+                  <div style={sunsetStyles.meaning}>{r.en}</div>
+                </div>
+              ))}
+            </div>
+            <div style={sunsetStyles.chatCard}>
+              <div style={sunsetStyles.chatThem}>How do you say "see you later"?</div>
+              <div style={sunsetStyles.chatYou}>להתראות! or just "bye" 😉</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MARQUEE */}
+      <div style={sunsetStyles.marquee}>
+        <div style={sunsetStyles.marqueeTrack}>
+          {['shalom','toda','bevakasha','sababa','yalla','ḥaval al hazman','aḥla','betaḥ','shalom','toda','bevakasha','sababa','yalla','ḥaval al hazman','aḥla','betaḥ'].map((w,i)=>(
+            <span key={i} style={sunsetStyles.marqueeItem}>✦ {w}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* TEACHERS */}
+      <section style={sunsetStyles.teachers}>
+        <div style={sunsetStyles.wrap}>
+          <div style={{textAlign:'center', marginBottom:48}}>
+            <div style={sunsetStyles.scribble}>meet your teachers</div>
+            <h2 style={sunsetStyles.h2}>Two Israelis.<br/><span style={{color:'#FF6B9D'}}>One method. Lots of fun.</span></h2>
+          </div>
+          <div style={sunsetStyles.teacherGrid}>
+            <article style={sunsetStyles.teacherCard}>
+              <div style={sunsetStyles.teacherPhotoWrap}>
+                <img src="assets/eyal.jpg" alt="Eyal Yagel" style={sunsetStyles.teacherPhoto}/>
+                <div style={sunsetStyles.teacherTag}>📍 Tel Aviv</div>
+                <div style={sunsetStyles.teacherRibbon}>Course creator</div>
+              </div>
+              <div style={{padding:'36px 28px 28px'}}>
+                <h3 style={{fontSize:28, fontWeight:900, margin:'0 0 4px'}}>Eyal Yagel</h3>
+                <div style={{color:'#FF6B9D', fontWeight:700, fontSize:15, marginBottom:14}}>Lead Teacher · Conversation Method</div>
+                <p style={{color:'#5b3a30', margin:'0 0 16px', lineHeight:1.6}}>
+                  Born and raised in Israel. 8+ years teaching students from around the world to actually
+                  speak Hebrew. I teach in <b>English &amp; Spanish</b> — ¡también hablo español! — so we meet
+                  you where you are. Hebrew is learned in conversation, not in a textbook.
+                </p>
+                <div style={{display:'flex', flexWrap:'wrap', gap:8}}>
+                  {['🇪🇸 Habla español','Israeli slang','Daily conversation','Beginners','AI-powered practice'].map(t=>(<span key={t} style={sunsetStyles.tag}>{t}</span>))}
+                </div>
+                <div style={sunsetStyles.teacherQuote}>"If you understand 'yalla' — you're already halfway there."</div>
+              </div>
+            </article>
+            <article style={{...sunsetStyles.teacherCard, background:'linear-gradient(180deg,#fff,#FFF1D6)'}}>
+              <div style={{...sunsetStyles.teacherPhotoWrap, background:'repeating-linear-gradient(135deg,#FFC4D6 0 12px,#FFA1BD 12px 24px)'}}>
+                <div style={sunsetStyles.teacherPlaceholder}>[ Lior's photo ]</div>
+                <div style={sunsetStyles.teacherTag}>📍 Jerusalem</div>
+                <div style={{...sunsetStyles.teacherRibbon, background:'#A855F7', boxShadow:'0 6px 0 #6B21A8'}}>Grammar wizard</div>
+              </div>
+              <div style={{padding:'36px 28px 28px'}}>
+                <h3 style={{fontSize:28, fontWeight:900, margin:'0 0 4px'}}>Lior</h3>
+                <div style={{color:'#A855F7', fontWeight:700, fontSize:15, marginBottom:14}}>Co-Teacher · Grammar & Writing</div>
+                <p style={{color:'#5b3a30', margin:'0 0 16px', lineHeight:1.6}}>
+                  Lior turns Hebrew grammar — usually called a nightmare — into something clear and even fun.
+                  With a linguistics background and academic teaching experience, Lior builds your reading
+                  and writing confidence step by step.
+                </p>
+                <div style={{display:'flex', flexWrap:'wrap', gap:8}}>
+                  {['Easy grammar','Reading & writing','Intermediate+','Verb patterns'].map(t=>(<span key={t} style={sunsetStyles.tag}>{t}</span>))}
+                </div>
+                <div style={sunsetStyles.teacherQuote}>"Grammar isn't rules — it's a pattern. Once you see the pattern, it flows."</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY */}
+      <section id="why" style={sunsetStyles.why}>
+        <div style={sunsetStyles.wrap}>
+          <div style={{textAlign:'center', marginBottom:48}}>
+            <div style={sunsetStyles.scribble}>why us?</div>
+            <h2 style={sunsetStyles.h2}>Six reasons we're<br/><span style={{color:'#FF6B9D'}}>different.</span></h2>
+          </div>
+          <div style={sunsetStyles.whyGrid}>
+            {[
+              {ic:'🗣️', t:'Daily Hebrew, not textbook', d:'No conjugation tables. We teach the Hebrew you\'ll actually use — at the café, with friends, in the taxi. The slang, the cadence, the real thing.', c:'#FF6B9D'},
+              {ic:'⏳', t:'8+ years of experience', d:'Eyal has taught hundreds of students from 30+ countries to actually speak. He knows where you\'ll get stuck — and how to unstick you fast.', c:'#A855F7'},
+              {ic:'💸', t:'Friendly price', d:'Group lessons from $19. 1-on-1 from $45. No annual contracts, no hidden fees. Pay-as-you-go or save with a package — your choice.', c:'#FFB347'},
+              {ic:'🤖', t:'AI between lessons', d:'Custom AI practice partner you can chat with 24/7 — corrections, voice practice, vocab drills. So you keep momentum even on busy weeks.', c:'#0080FF'},
+              {ic:'🎵', t:'Songs & culture', d:'Learn through Israeli music, food, holidays, and humor. Because language without culture is just words — and Hebrew has the best stories.', c:'#10B981'},
+              {ic:'🎯', t:'Custom plan per student', d:'No two students get the same path. We build your plan around your goal — Aliyah, family, work, travel — and adjust as you grow.', c:'#FF6B9D'},
+            ].map((v,i)=>(
+              <div key={i} style={sunsetStyles.whyCard}>
+                <div style={{...sunsetStyles.whyIcon, background:v.c}}>{v.ic}</div>
+                <h3 style={sunsetStyles.h3}>{v.t}</h3>
+                <p style={{color:'#5b3a30', margin:0}}>{v.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* COMPARE */}
+      <section id="compare" style={sunsetStyles.compare}>
+        <div style={sunsetStyles.wrap}>
+          <div style={{textAlign:'center', marginBottom:48}}>
+            <div style={sunsetStyles.scribble}>vs. the rest</div>
+            <h2 style={sunsetStyles.h2}>How we stack up.</h2>
+          </div>
+          <div style={sunsetStyles.compareTable}>
+            <div style={{...sunsetStyles.compareRow, ...sunsetStyles.compareHeader}}>
+              <div></div>
+              <div style={sunsetStyles.compareUs}>Hebrew Hack</div>
+              <div>Apps (Duo etc.)</div>
+              <div>Generic tutors</div>
+              <div>Ulpan</div>
+            </div>
+            {[
+              ['Live native teacher','✓ Eyal & Lior','—','✓','✓'],
+              ['Speak from day 1','✓','—','Sometimes','—'],
+              ['Tiny groups (4–6)','✓','—','—','30+ students'],
+              ['Real Israeli slang','✓','Bookish','Sometimes','Formal'],
+              ['Custom plan per student','✓','One-size','Maybe','—'],
+              ['AI practice 24/7','✓','—','—','—'],
+              ['Songs & culture built-in','✓','—','Rarely','Sometimes'],
+              ['Spanish & English support','✓ Eyal','English','English','Hebrew only'],
+              ['Starting price / lesson','$19','Free–$15','$60+','$25 (huge class)'],
+            ].map((row,i)=>(
+              <div key={i} style={sunsetStyles.compareRow}>
+                <div style={{fontWeight:700, color:'#1B1B1F'}}>{row[0]}</div>
+                <div style={sunsetStyles.compareUs}><b>{row[1]}</b></div>
+                <div style={{color:'#999'}}>{row[2]}</div>
+                <div style={{color:'#999'}}>{row[3]}</div>
+                <div style={{color:'#999'}}>{row[4]}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* LEAD MAGNET */}
+      <section style={sunsetStyles.leadMagnet}>
+        <div style={sunsetStyles.wrap}>
+          <div style={sunsetStyles.leadGrid}>
+            <div>
+              <div style={sunsetStyles.scribble}>free download · for new sign-ups</div>
+              <h2 style={sunsetStyles.h2}>Get the<br/><span style={{color:'#FF6B9D'}}>50 Hebrew Phrases</span><br/>every Israeli uses.</h2>
+              <p style={{color:'#5b3a30', fontSize:18, lineHeight:1.6, margin:'18px 0 28px', maxWidth:480}}>
+                A printable PDF cheat sheet with the slang, greetings, and survival phrases that
+                will get you 80% of the way through any Israeli interaction. Free for everyone
+                who books a trial lesson.
+              </p>
+              <ul style={{listStyle:'none', padding:0, margin:'0 0 28px', color:'#1B1B1F', fontSize:16, lineHeight:1.8}}>
+                <li>✓ 50 essential phrases — Hebrew, transliteration, English</li>
+                <li>✓ When to use each one (with examples)</li>
+                <li>✓ Pronunciation audio links</li>
+                <li>✓ Bonus: 10 phrases that make you sound like a local</li>
+              </ul>
+              <a href="cheatsheet.html" target="_blank" style={sunsetStyles.btnPrimary}>📄 Preview the PDF →</a>
+            </div>
+            <div style={sunsetStyles.pdfMockWrap}>
+              <div style={sunsetStyles.pdfMock}>
+                <div style={{padding:'24px 28px 18px', borderBottom:'2px dashed #FFD700'}}>
+                  <div style={{fontFamily:"'Caveat'", color:'#FF6B9D', fontSize:18}}>Hebrew Hack · cheat sheet</div>
+                  <div style={{fontSize:22, fontWeight:900, marginTop:4, color:'#1B1B1F'}}>50 Phrases Every Israeli Uses</div>
+                </div>
+                <div style={{padding:'18px 28px'}}>
+                  {[
+                    {h:'מה נשמע?', t:'ma nishma?', e:"What's up?"},
+                    {h:'סבבה לגמרי', t:'sababa legamrey', e:'Totally cool'},
+                    {h:'יאללה ביי', t:'yalla bye', e:'See ya!'},
+                    {h:'חבל על הזמן', t:"ḥaval al ha'zman", e:'Amazing!'},
+                    {h:'אחלה', t:'aḥla', e:'Awesome'},
+                  ].map((r,i)=>(
+                    <div key={i} style={{display:'flex', justifyContent:'space-between', alignItems:'baseline', padding:'7px 0', borderBottom:'1px dashed rgba(0,0,0,.08)'}}>
+                      <div>
+                        <span style={{fontSize:18, fontWeight:700}}>{r.h}</span>
+                        <span style={{fontFamily:"'Caveat'", color:'#FF6B9D', marginLeft:10, fontSize:15}}>{r.t}</span>
+                      </div>
+                      <span style={{fontSize:13, color:'#5b3a30'}}>{r.e}</span>
+                    </div>
+                  ))}
+                  <div style={{textAlign:'center', color:'#999', fontSize:12, marginTop:14, fontStyle:'italic'}}>... 45 more on the inside ...</div>
+                </div>
+              </div>
+              <div style={sunsetStyles.pdfStamp}>FREE</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section id="testimonials" style={sunsetStyles.testimonials}>
+        <div style={sunsetStyles.wrap}>
+          <div style={{textAlign:'center', marginBottom:40}}>
+            <div style={sunsetStyles.scribble}>students say</div>
+            <h2 style={sunsetStyles.h2}>Don't take our word.<br/><span style={{color:'#FF6B9D'}}>Read theirs.</span></h2>
+          </div>
+          <div style={sunsetStyles.testGrid}>
+            {[
+              {q:'I tried 3 apps before this. Only with this class did I actually start speaking. The teachers make it feel like meeting friends.', n:'Sarah M.', p:'New York · 6 months in', i:'SM', f:false},
+              {q:"Visited Israel after 4 months. Ordered coffee, had a full taxi convo, haggled at the market — nobody switched to English. That's the win.", n:'David K.', p:'London · graduated', i:'DK', f:true},
+              {q:'My grandfather only spoke Hebrew. Now I can finally read his letters. Worth every penny. Lior is a grammar genius.', n:"Rachel B.", p:'Melbourne · 3 months in', i:'RB', f:false},
+            ].map((t,i)=>(
+              <div key={i} style={t.f ? sunsetStyles.testCardFeat : sunsetStyles.testCard}>
+                <div style={{...sunsetStyles.stars, fontSize:18, marginBottom:14}}>★★★★★</div>
+                <blockquote style={{margin:'0 0 20px', fontSize:16, lineHeight:1.6, fontWeight:500, color: t.f ? '#fff' : '#1B1B1F'}}>"{t.q}"</blockquote>
+                <div style={{display:'flex', alignItems:'center', gap:12}}>
+                  <div style={sunsetStyles.avatar}>{t.i}</div>
+                  <div>
+                    <div style={{fontWeight:800, color: t.f?'#fff':'#1B1B1F'}}>{t.n}</div>
+                    <div style={{fontSize:13, color: t.f?'rgba(255,255,255,.7)':'#7a5a4f'}}>{t.p}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" style={sunsetStyles.faq}>
+        <div style={sunsetStyles.wrapNarrow}>
+          <div style={{textAlign:'center', marginBottom:40}}>
+            <div style={sunsetStyles.scribble}>questions?</div>
+            <h2 style={sunsetStyles.h2}>You're not the<br/><span style={{color:'#FF6B9D'}}>first to ask.</span></h2>
+          </div>
+          {[
+            {q:'I\'m a total beginner. Can I really start speaking?', a:'Yes — that\'s exactly who this is for. We start where you are. By lesson 3, most beginners can introduce themselves and order food in Hebrew.'},
+            {q:'¿Hablas español? Can I learn in Spanish?', a:'¡Sí! Eyal teaches in both English AND Spanish. If Spanish is your stronger language, just say so when you sign up — we\'ll match you to a Spanish-language track. ¡Bienvenidos!'},
+            {q:'What\'s included with the AI practice partner?', a:'Every student gets 24/7 access to our custom Hebrew AI — chat in text or voice, get gentle corrections, drill vocab, and review lesson topics. It\'s not a replacement for live lessons; it\'s the practice partner you need between them.'},
+            {q:'How is the lesson plan personalized?', a:'On your trial we map out your goal — Aliyah, family, work, travel, heritage — and your starting level. Eyal builds a plan around YOU, including which songs, slang, and scenarios to focus on. We adjust as you grow.'},
+            {q:'How does the trial lesson work?', a:'You sign up, pick a time, and meet one of us 1-on-1 on Zoom for 30 minutes. We\'ll chat, gauge your level, and you decide if it\'s for you. No card, no commitment — and you get the 50-phrase PDF either way.'},
+            {q:'1-on-1 or small groups — which should I pick?', a:'1-on-1 is faster and totally personalized. Small groups (4–6) are more affordable, more social, and a lot of fun. Most students start in groups and add 1-on-1 later.'},
+            {q:'What if I miss a lesson?', a:'Every group lesson is recorded. You\'ll get the recording + notes + homework. For 1-on-1, we just reschedule — no charge.'},
+            {q:'How much does it cost after the trial?', a:'Group lessons start at $19/lesson. 1-on-1 starts at $45/lesson. Packages bring it down further. Way friendlier than most tutors — we\'ll discuss in your trial.'},
+          ].map((f,i)=>(
+            <div key={i} style={sunsetStyles.faqItem} onClick={()=>setOpenFAQ(openFAQ===i?-1:i)}>
+              <div style={sunsetStyles.faqQ}>
+                <span>{f.q}</span>
+                <span style={{transform: openFAQ===i?'rotate(45deg)':'none', transition:'transform .2s', fontSize:24, color:'#FF6B9D'}}>+</span>
+              </div>
+              {openFAQ===i && <div style={sunsetStyles.faqA}>{f.a}</div>}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SIGNUP */}
+      <section id="signup" style={sunsetStyles.signup}>
+        <div style={sunsetStyles.wrap}>
+          <div style={sunsetStyles.signupCard}>
+            <div style={{...sunsetStyles.scribble, color:'#FFD700'}}>free trial lesson</div>
+            <h2 style={{...sunsetStyles.h2, color:'#fff'}}>Let's meet 👋</h2>
+            <p style={{color:'rgba(255,255,255,.85)', fontSize:18}}>Drop your details. We'll be in touch within 24h with a trial slot — and email you the <b style={{color:'#FFD700'}}>50 Phrases PDF</b> right away.</p>
+
+            {!submitted ? (
+              <form style={sunsetStyles.form} onSubmit={(e)=>{e.preventDefault(); setSubmitted(true);}}>
+                <div>
+                  <label style={sunsetStyles.label}>Full name</label>
+                  <input style={sunsetStyles.input} placeholder="Your name" required/>
+                </div>
+                <div>
+                  <label style={sunsetStyles.label}>Email</label>
+                  <input style={sunsetStyles.input} type="email" placeholder="you@email.com" required/>
+                </div>
+                <div>
+                  <label style={sunsetStyles.label}>Hebrew level</label>
+                  <select style={sunsetStyles.input}>
+                    <option>Total beginner</option>
+                    <option>A few words</option>
+                    <option>Read/write, can't speak</option>
+                    <option>Speak but want to improve</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={sunsetStyles.label}>Your goal</label>
+                  <select style={sunsetStyles.input}>
+                    <option>Daily conversation</option>
+                    <option>Trip / Aliyah</option>
+                    <option>Family connection</option>
+                    <option>Work / professional</option>
+                    <option>Culture / heritage</option>
+                  </select>
+                </div>
+                <button style={sunsetStyles.submit} type="submit">Yes, I want my free trial →</button>
+              </form>
+            ) : (
+              <div style={{padding:'40px 0', textAlign:'center'}}>
+                <div style={{fontSize:60}}>🎉</div>
+                <h3 style={{...sunsetStyles.h3, color:'#fff', marginTop:12}}>Got it! We'll be in touch soon.</h3>
+                <p style={{color:'rgba(255,255,255,.85)'}}>Check your email — we sent you 3 phrases every Israeli uses.</p>
+              </div>
+            )}
+
+            <div style={sunsetStyles.perks}>
+              <span><span style={{color:'#10B981', fontWeight:900}}>✓</span> No credit card</span>
+              <span><span style={{color:'#10B981', fontWeight:900}}>✓</span> Cancel anytime</span>
+              <span><span style={{color:'#10B981', fontWeight:900}}>✓</span> 1-on-1 or group</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={sunsetStyles.foot}>
+        <h3 style={{color:'#fff', fontSize:24, margin:'0 0 8px'}}>Ready to speak Hebrew?</h3>
+        <p style={{margin:'0 0 14px', opacity:.9}}>Join hundreds of students already doing it.</p>
+        <div style={{fontSize:32}}>🇮🇱</div>
+        <small style={{display:'block', opacity:.85, marginTop:12, fontSize:13}}>© 2026 Hebrew Hack · made with love in Israel</small>
+      </footer>
+    </div>
+  );
+}
+
+const sunsetStyles = {
+  root: {
+    fontFamily: "'Rubik', system-ui, sans-serif",
+    background: 'linear-gradient(180deg, #FFF5E1 0%, #FFE4D6 50%, #FFD0E0 100%)',
+    color: '#1B1B1F', position:'relative', overflow:'hidden', minHeight:'100%',
+    width: 1280,
+  },
+  blob: { position:'absolute', width:400, height:400, borderRadius:'50%', filter:'blur(80px)', opacity:.5, pointerEvents:'none' },
+
+  nav: { position:'sticky', top:0, zIndex:50, background:'rgba(255,245,225,.85)', backdropFilter:'blur(10px)', borderBottom:'1px solid rgba(0,0,0,.06)' },
+  navInner: { maxWidth:1180, margin:'0 auto', padding:'14px 24px', display:'flex', alignItems:'center', justifyContent:'space-between' },
+  logo: { display:'flex', alignItems:'center', gap:10, fontWeight:900, fontSize:22 },
+  logoMark: { width:40, height:40, borderRadius:12, background:'linear-gradient(135deg,#FF6B9D,#FFB347)', color:'#fff', display:'grid', placeItems:'center', fontWeight:900, fontSize:22, transform:'rotate(-4deg)', boxShadow:'0 4px 0 #C2185B' },
+  navLinks: { display:'flex', gap:28, fontWeight:600, color:'#5b3a30' },
+  navLink: { textDecoration:'none', color:'inherit' },
+  navCta: { background:'#1B1B1F', color:'#fff', padding:'10px 18px', borderRadius:10, fontWeight:700, fontSize:14, textDecoration:'none' },
+
+  hero: { padding:'60px 24px 100px', position:'relative', zIndex:1 },
+  heroInner: { maxWidth:1180, margin:'0 auto', display:'grid', gridTemplateColumns:'1.1fr .9fr', gap:60, alignItems:'center' },
+  scribble: { fontFamily:"'Caveat', cursive", color:'#E0457B', fontSize:28, transform:'rotate(-3deg)', display:'inline-block', marginBottom:8 },
+  h1: { fontSize:72, fontWeight:900, lineHeight:1.05, letterSpacing:'-.02em', margin:'0 0 16px' },
+  h1Accent: { background:'linear-gradient(90deg,#FF6B9D,#FFB347,#A855F7)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' },
+  lead: { fontSize:20, color:'#5b3a30', lineHeight:1.6, maxWidth:520 },
+  heroCta: { display:'flex', gap:20, alignItems:'center', margin:'28px 0 0', flexWrap:'wrap' },
+  btnPrimary: { display:'inline-flex', alignItems:'center', gap:10, background:'linear-gradient(135deg,#FF6B9D,#A855F7)', color:'#fff', fontWeight:800, fontSize:18, padding:'18px 28px', borderRadius:16, boxShadow:'0 8px 0 #7C2D5C, 0 16px 30px rgba(255,107,157,.4)', textDecoration:'none' },
+  trust: { display:'flex', alignItems:'center', gap:8, fontSize:14, color:'#5b3a30' },
+  stars: { color:'#F59E0B', letterSpacing:2 },
+  statRow: { display:'flex', gap:24, marginTop:32, alignItems:'center' },
+  sep: { width:1, height:40, background:'rgba(0,0,0,.15)' },
+
+  heroVisual: { position:'relative', minHeight:480 },
+  sticker: { position:'absolute', top:-10, left:-10, width:130, padding:'14px 16px', transform:'rotate(-8deg)', background:'#FFD700', borderRadius:18, fontFamily:"'Caveat'", fontWeight:700, textAlign:'center', lineHeight:1, boxShadow:'0 12px 24px rgba(217,119,6,.4)', zIndex:2 },
+  lessonCard: { position:'absolute', inset:'20px 40px 80px 0', background:'linear-gradient(180deg,#fff,#FFFAF0)', borderRadius:22, boxShadow:'0 20px 50px rgba(0,0,0,.12)', padding:22, transform:'rotate(-2deg)' },
+  lessonHead: { display:'flex', alignItems:'center', gap:10, marginBottom:14, fontWeight:800, fontSize:13, color:'#5b3a30', letterSpacing:'.04em' },
+  greenDot: { width:10, height:10, borderRadius:'50%', background:'#10B981' },
+  lessonRow: { display:'flex', alignItems:'baseline', justifyContent:'space-between', borderBottom:'1px dashed rgba(0,0,0,.08)', padding:'10px 0' },
+  heb: { fontSize:24, fontWeight:700 },
+  translit: { color:'#E0457B', fontFamily:"'Caveat'", fontSize:18 },
+  meaning: { color:'#5b3a30', fontSize:14 },
+  chatCard: { position:'absolute', bottom:0, left:60, width:'70%', background:'#fff', borderRadius:22, boxShadow:'0 20px 50px rgba(0,0,0,.12)', padding:18, transform:'rotate(3deg)' },
+  chatThem: { background:'#F1F1F4', padding:'10px 14px', borderRadius:16, borderTopLeftRadius:4, fontWeight:600, fontSize:15, marginBottom:8, display:'inline-block', maxWidth:'85%' },
+  chatYou: { background:'linear-gradient(135deg,#FF6B9D,#A855F7)', color:'#fff', padding:'10px 14px', borderRadius:16, borderTopRightRadius:4, fontWeight:600, fontSize:15, marginLeft:'auto', display:'block', maxWidth:'85%', width:'fit-content' },
+
+  marquee: { background:'#1B1B1F', color:'#fff', padding:'18px 0', overflow:'hidden', borderTop:'4px solid #FFB347', borderBottom:'4px solid #FF6B9D' },
+  marqueeTrack: { display:'flex', gap:60, whiteSpace:'nowrap', animation:'scroll 30s linear infinite', fontWeight:800, fontSize:22 },
+  marqueeItem: { display:'inline-flex', alignItems:'center', gap:14 },
+
+  teachers: { padding:'100px 24px', background:'#fff', position:'relative', zIndex:1 },
+  teacherGrid: { display:'grid', gridTemplateColumns:'1fr 1fr', gap:28 },
+  teacherCard: { background:'linear-gradient(180deg,#fff,#FFFAF0)', borderRadius:28, overflow:'hidden', boxShadow:'0 8px 0 rgba(217,119,6,.18), 0 24px 50px rgba(0,0,0,.08)', border:'1px solid rgba(217,119,6,.12)' },
+  teacherPhotoWrap: { aspectRatio:'4/3', background:'repeating-linear-gradient(135deg,#FFD700 0 12px,#FFB347 12px 24px)', position:'relative', display:'grid', placeItems:'center', overflow:'hidden' },
+  teacherPhoto: { width:'100%', height:'100%', objectFit:'cover', display:'block' },
+  teacherPlaceholder: { background:'rgba(255,255,255,.85)', border:'2px dashed rgba(0,0,0,.25)', padding:'14px 18px', borderRadius:12, fontFamily:'monospace', fontSize:13, color:'#5b3a30', fontWeight:600 },
+  teacherTag: { position:'absolute', top:14, left:14, background:'#fff', padding:'6px 12px', borderRadius:999, fontWeight:700, fontSize:13, boxShadow:'0 4px 12px rgba(0,0,0,.1)' },
+  teacherRibbon: { position:'absolute', bottom:-16, right:24, background:'#FF6B9D', color:'#fff', padding:'8px 14px', borderRadius:12, fontWeight:800, fontSize:14, transform:'rotate(-3deg)', boxShadow:'0 6px 0 #C2185B' },
+  tag: { background:'#FFF1D6', color:'#D97706', padding:'6px 12px', borderRadius:999, fontWeight:700, fontSize:13 },
+  teacherQuote: { marginTop:18, padding:'14px 16px', borderRadius:14, background:'#FFF5E1', borderLeft:'4px solid #FFB347', fontFamily:"'Caveat'", fontSize:22, color:'#1B1B1F', lineHeight:1.3 },
+
+  why: { padding:'100px 24px', background:'#FFF8E7', position:'relative', zIndex:1 },
+  whyGrid: { display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:24 },
+  whyCard: { background:'#fff', borderRadius:24, padding:28, border:'1px solid rgba(217,119,6,.12)', boxShadow:'0 4px 0 rgba(217,119,6,.1)' },
+  whyIcon: { width:56, height:56, borderRadius:16, display:'grid', placeItems:'center', fontSize:28, marginBottom:18, color:'#fff', boxShadow:'0 6px 0 rgba(0,0,0,.08)' },
+
+  compare: { padding:'100px 24px', background:'linear-gradient(180deg,#FFF8E7,#FFE4D6)' },
+  compareTable: { background:'#fff', borderRadius:20, overflow:'hidden', border:'2px solid #1B1B1F', boxShadow:'8px 8px 0 #FFD700' },
+  compareRow: { display:'grid', gridTemplateColumns:'1.5fr 1fr 1fr 1fr 1fr', padding:'16px 20px', borderBottom:'1px solid rgba(0,0,0,.08)', alignItems:'center', fontSize:14 },
+  compareHeader: { background:'#1B1B1F', color:'#fff', fontWeight:800, fontSize:14, textTransform:'uppercase', letterSpacing:'.05em' },
+  compareUs: { background:'rgba(255,107,157,.1)', color:'#FF6B9D', fontWeight:700, padding:'8px 12px', borderRadius:8, textAlign:'center' },
+
+  leadMagnet: { padding:'100px 24px', background:'#fff' },
+  leadGrid: { display:'grid', gridTemplateColumns:'1fr 1fr', gap:60, alignItems:'center' },
+  pdfMockWrap: { position:'relative', perspective:'1200px' },
+  pdfMock: { background:'#fff', borderRadius:8, boxShadow:'0 30px 60px rgba(0,0,0,.18), 0 8px 0 rgba(217,119,6,.15)', border:'1px solid rgba(0,0,0,.08)', transform:'rotate(-2deg)', overflow:'hidden' },
+  pdfStamp: { position:'absolute', top:-20, right:-10, width:96, height:96, borderRadius:'50%', background:'#FFD700', color:'#1B1B1F', fontWeight:900, fontSize:22, display:'grid', placeItems:'center', transform:'rotate(15deg)', boxShadow:'0 12px 28px rgba(217,119,6,.4)', border:'3px solid #fff' },
+  wrap: { maxWidth:1180, margin:'0 auto' },
+  wrapNarrow: { maxWidth:760, margin:'0 auto' },
+  h2: { fontSize:48, fontWeight:900, lineHeight:1.05, letterSpacing:'-.02em', margin:'0 0 12px' },
+  h3: { fontSize:22, fontWeight:900, margin:'0 0 8px' },
+  whyGrid: { display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:24 },
+  whyCard: { background:'#FFF5E1', borderRadius:24, padding:32, border:'1px solid rgba(217,119,6,.12)' },
+  whyIcon: { width:56, height:56, borderRadius:16, display:'grid', placeItems:'center', fontSize:28, marginBottom:18, color:'#fff', boxShadow:'0 6px 0 rgba(0,0,0,.08)' },
+
+  testimonials: { padding:'100px 24px', background:'linear-gradient(180deg,#FFE4D6,#FFD0E0)', position:'relative', zIndex:1 },
+  testGrid: { display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:24 },
+  testCard: { background:'#fff', padding:28, borderRadius:22, boxShadow:'0 4px 0 rgba(217,119,6,.15), 0 16px 30px rgba(0,0,0,.06)' },
+  testCardFeat: { background:'#1B1B1F', color:'#fff', padding:28, borderRadius:22, boxShadow:'0 16px 40px rgba(0,0,0,.2)' },
+  avatar: { width:44, height:44, borderRadius:'50%', background:'linear-gradient(135deg,#FFB347,#FF6B9D)', color:'#fff', display:'grid', placeItems:'center', fontWeight:900, fontSize:14 },
+
+  faq: { padding:'100px 24px', background:'#FFF5E1', position:'relative', zIndex:1 },
+  faqItem: { background:'#fff', borderRadius:16, padding:'20px 24px', marginBottom:12, cursor:'pointer', border:'2px solid transparent', transition:'border-color .15s' },
+  faqQ: { display:'flex', justifyContent:'space-between', alignItems:'center', fontWeight:800, fontSize:18 },
+  faqA: { marginTop:12, color:'#5b3a30', fontSize:16, lineHeight:1.6 },
+
+  signup: { padding:'100px 24px', background:'linear-gradient(135deg,#A855F7,#FF6B9D 50%,#FFB347)', position:'relative', zIndex:1, overflow:'hidden' },
+  signupCard: { background:'rgba(255,255,255,.1)', backdropFilter:'blur(12px)', border:'1px solid rgba(255,255,255,.2)', borderRadius:32, padding:48, maxWidth:720, margin:'0 auto', textAlign:'center', color:'#fff' },
+  form: { display:'grid', gridTemplateColumns:'1fr 1fr', gap:14, marginTop:28, textAlign:'left' },
+  label: { display:'block', fontSize:13, fontWeight:700, marginBottom:6, color:'rgba(255,255,255,.9)' },
+  input: { width:'100%', padding:'14px 16px', borderRadius:12, background:'rgba(255,255,255,.95)', border:'2px solid transparent', fontFamily:'inherit', fontSize:16, color:'#1B1B1F', boxSizing:'border-box' },
+  submit: { gridColumn:'1/-1', background:'#FFD700', color:'#1B1B1F', padding:18, borderRadius:14, fontWeight:900, fontSize:18, border:0, cursor:'pointer', boxShadow:'0 6px 0 #B8860B' },
+  perks: { display:'flex', gap:18, justifyContent:'center', flexWrap:'wrap', marginTop:24, fontSize:14, color:'rgba(255,255,255,.9)' },
+
+  foot: { background:'#1B1B1F', padding:'40px 24px', color:'#fff', textAlign:'center' },
+};
+
+window.SunsetHack = SunsetHack;
